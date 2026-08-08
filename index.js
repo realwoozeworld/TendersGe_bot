@@ -61,7 +61,8 @@ async function checkTenders() {
         
         const html = await res.text();
         const $ = cheerio.load(html);
-
+        console.log("HTML სიგრძე:", html.length); // დააბეჭდს რამდენად დიდ გვერდს იღებს
+        console.log("HTML-ის დასაწყისი:", html.substring(0, 300)); // დააბეჭდს კოდის პირველ 300 სიმბოლოს
         const tenders = [];
 
         // ვამუშავებთ გვერდზე არსებულ ელემენტებს
