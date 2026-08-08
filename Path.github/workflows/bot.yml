@@ -1,0 +1,28 @@
+name: Run Tender Bot
+
+on:
+  schedule:
+    - cron: '0 * * * *' # ეშვება ყოველ საათში ერთხელ
+  workflow_dispatch: # გაძლევს საშუალებას ხელითაც გაუშვა ნებისმიერ დროს
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run Bot Script
+      env:
+        # აქ უნდა მიუთითო ის Secret, რომელიც წეღან შექმენი
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }} 
+      run: node index.js # აქ ჩაწერე შენი მთავარი ფაილის სახელი
